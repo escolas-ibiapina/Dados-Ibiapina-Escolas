@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Aderaldo Negreiro - Acesso às Turmas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        .botao-escola {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 90%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 15px 20px;
+
+    background-color: #3c7db3; /* azul suave */
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
+
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.botao-escola:hover {
+    background-color: #6c9ccc;
+    transform: translateY(-2px);
+}
+
+.botao-escola-icone {
+    width: 24px;
+    opacity: 0.8;
+}
+
+/* Botão marcado / ativo (verde) */
+.botao-escola.ativo {
+    background-color: #8ecfa0; /* verde suave */
+}
+
+        /* Paleta e Tipografia */
+        :root {
+            --blue-primary: #12af6e; /* Cornflower Blue */
+            --green-highlight: #4b9cdf; /* Green Yellow */
+            --dark-text: #2F4F4F; /* Dark Slate Gray */
+            --light-bg: #E0FFFF; /* Light Cyan para gradiente */
+            --soft-white: #F8F8FF; /* Ghost White */
+        }
+
+        body {
+            /* Aplica o gradiente de fundo */
+            background: linear-gradient(to bottom, var(--light-bg), var(--soft-white));
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* --- Cabeçalho e Títulos --- */
+         .header-container2 {
+             /* Fundo sólido para o cabeçalho */
+            background-color: white;
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center; /* Centraliza logo e títulos */
+            align-items: center;
+            flex-direction: column;
+            /* Cantos arredondados na parte inferior */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+         }
+
+        .header-container {
+            /* Fundo sólido para o cabeçalho */
+            background-color: var(--blue-primary);
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center; /* Centraliza logo e títulos */
+            align-items: center;
+            flex-direction: column;
+            /* Cantos arredondados na parte inferior */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            /* Ajuste para o celular */
+            max-width: 200px; 
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800; /* Extra Bold */
+            font-size: 2em;
+            color: white; /* Cor branca no banner */
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--soft-white);
+            margin-bottom: 15px;
+        }
+
+        /* --- Contêiner e Botões de Turmas --- */
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px; /* Aumenta o espaçamento entre os grupos de botões */
+            padding: 0 10px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra mais visível */
+            max-width: 95%;
+            width: 500px;
+        }
+        
+        .section-card h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            color: var(--blue-primary);
+            border-bottom: 2px solid var(--blue-primary);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        button {
+            /* Estilo Pílula */
+            border-radius: 25px; 
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            
+            /* Estilo Padrão (Não Selecionado) */
+            background-color: var(--soft-white);
+            border: 1px solid var(--blue-primary);
+            color: var(--dark-text);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #E6E6FA; /* Um toque de cor no hover */
+            border-color: var(--blue-primary);
+            transform: translateY(-2px); /* Efeito de elevação */
+            box-shadow: 0 4px 8px rgba(114, 209, 216, 0.15);
+        }
+
+        .active-button {
+            /* Estilo do botão Ativo/Selecionado */
+            background-color: var(--green-highlight);
+            color: var(--dark-text);
+            border-color: var(--green-highlight);
+            box-shadow: 0 6px 12px rgba(56, 130, 216, 0.4); 
+            transform: translateY(-2px);
+        }
+        
+        /* --- Área de Resultado e Instrução --- */
+
+        .instrucao {
+            margin-top: 30px;
+            color: #666;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        #resultado {
+            /* Estilo do Placeholder/Resultado */
+            margin-top: 20px;
+            padding: 30px;
+            width: 85%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            text-align: left;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+        }
+        #resultado h3 {
+            color: var(--blue-primary);
+            margin-top: 0;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Responsividade básica para telas muito pequenas */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            .section-card {
+                padding: 15px;
+            }
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+   <div class="header-container2">
+        <img class="logo" src="imagem/78f05240-06d7-4c17-a2ec-4f31e905b923.png" alt="Logo Prefeitura">
+       
+    </div>
+    <p>
+
+    </p>
+
+    <div class="header-container">
+        
+        <h1 class="main-title">Escolas do Município </h1>
+        <h2 class="subtitle" >2026</h2>
+    </div>
+
+   
+
+    <p class="instrucao">Observação: Clique na Escola para visualizar as informações.</p>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Aderaldo Negreiros
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Amadeu Camelo
+</a>
+
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Dom Bosco
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Domingos Ferino
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Aderaldo Negreiros
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Amadeu Camelo
+</a>
+
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Dom Bosco
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Domingos Ferino
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Aderaldo Negreiros
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Amadeu Camelo
+</a>
+
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Dom Bosco
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Domingos Ferino
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Aderaldo Negreiros
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Amadeu Camelo
+</a>
+
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Dom Bosco
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Domingos Ferino
+</a>
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Aderaldo Negreiros
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Amadeu Camelo
+</a>
+
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Dom Bosco
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Domingos Ferino
+</a>
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Dom Bosco
+</a>
+
+<a href="http://127.0.0.1:5500/index.html" class="botao-escola">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/graduation-cap.png" class="botao-escola-icone">
+    Escola Domingos Ferino
+</a>
+
+
+    </body>
+    
+    </html>
