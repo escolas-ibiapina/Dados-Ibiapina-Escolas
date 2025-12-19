@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escola Juvêncio mendes da Rocha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+:root {
+    --blue-primary: #12af6e;
+    --green-highlight: #4b9cdf;
+    --dark-text: #2F4F4F;
+    --light-bg: #E0FFFF;
+    --soft-white: #F8F8FF;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(180deg, var(--light-bg), var(--soft-white));
+    text-align: center;
+    color: var(--dark-text);
+}
+
+/* LOGO */
+.header-container2 {
+    background: white;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* CABEÇALHO */
+.header-container {
+    background: var(--blue-primary);
+    color: white;
+    padding: 25px 15px;
+    border-radius: 0 0 25px 25px;
+}
+
+.main-title {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    font-size: 28px;
+}
+
+.subtitle {
+    margin: 6px 0 0;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* TEXTO */
+.instrucao {
+    margin: 25px 0 10px;
+    font-size: 16px;
+}
+
+/* CONTAINER */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    padding: 20px;
+}
+
+/* CARD SEÇÃO */
+.section-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-4px);
+}
+
+.section-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: var(--blue-primary);
+}
+
+/* BOTÕES */
+.botoes,
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+button:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+}
+
+button.ativo {
+    background: #16a34a;
+}
+
+/* RESULTADO */
+.resultado,
+.resultado-box {
+    margin-top: 15px;
+    text-align: left;
+}
+
+/* CARD DOS DADOS */
+.card {
+    background: var(--soft-white);
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    animation: fadeIn 0.3s ease;
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    color: var(--green-highlight);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<script>
+let botaoAtivo = null;
+let resultadoAtivo = null;
+
+function limparBotoes() {
+    document.querySelectorAll("button").forEach(btn => {
+        btn.classList.remove("ativo");
+    });
+}
+
+function carregarGrupo(inicio, fim, botao, idResultado) {
+
+    const resultado = document.getElementById(idResultado);
+
+    // 🔁 SE CLICAR NO MESMO BOTÃO, FECHA
+    if (botaoAtivo === botao) {
+        botao.classList.remove("ativo");
+        resultado.innerHTML = "";
+        botaoAtivo = null;
+        resultadoAtivo = null;
+        return;
+    }
+
+    // 🔒 FECHA RESULTADO ANTERIOR
+    if (resultadoAtivo) {
+        resultadoAtivo.innerHTML = "";
+    }
+
+    limparBotoes();
+    botao.classList.add("ativo");
+    botaoAtivo = botao;
+    resultadoAtivo = resultado;
+
+    resultado.innerHTML = "<p>Carregando dados...</p>";
+
+    const url =
+      "https://docs.google.com/spreadsheets/d/1giI3kNJGRrVrJA8w3rseop2GYu2KZFg1Y7IM3ZBZVF0/gviz/tq?tqx=out:json&gid=0&tq=select%20A,B,C,D";
+
+    fetch(url)
+        .then(res => res.text())
+        .then(text => {
+            const jsonText = text.replace(/^[\s\S]*?\(/, "").replace(/\);$/, "");
+            const json = JSON.parse(jsonText);
+
+            let html = "";
+
+            for (let i = inicio; i <= fim; i++) {
+                const row = json.table.rows[i];
+                if (!row) continue;
+
+                html += `
+                    <div class="card">
+                        <h3>${row.c[0]?.v || "—"}</h3>
+                        <div class="info">
+                            <span><b>Alunos:</b> ${row.c[1]?.v || "—"}</span>
+                            <span><b>Vagas:</b> ${row.c[2]?.v || "—"}</span>
+                            <span><b>Turno:</b> ${row.c[3]?.v || "—"}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultado.innerHTML = html;
+        })
+        .catch(() => {
+            resultado.innerHTML = "<p>Erro ao carregar os dados.</p>";
+        });
+}
+</script>
+
+
+</head>
+
+<body>
+
+<div class="header-container2">
+    <img src="imagem/78f05240-06d7-4c17-a2ec-4f31e905b923.png" alt="Logo" style="max-width:200px;">
+</div>
+
+<div class="header-container">
+    <h1 class="main-title">Escola Juvêncio mendes da Rocha</h1>
+    <h2 class="subtitle">Acesso às Turmas</h2>
+</div>
+
+<p class="instrucao">Clique em uma turma para ver os dados.</p>
+ 
+<div class="buttons-container">
+
+    <div class="section-card">
+        <h3><i class="fas fa-baby"></i> Educação Infantil</h3>
+
+        <div class="botoes">
+            <button onclick="carregarGrupo(0,5,this,'resultadoInfantil')">Infantil II</button>
+            <button onclick="carregarGrupo(6,11,this, 'resultadoInfantil')">Infantil III</button>
+            <button onclick="carregarGrupo(12,17,this, 'resultadoInfantil')">Infantil IV</button>
+            <button onclick="carregarGrupo(18,23,this, 'resultadoInfantil')">Infantil V</button>
+        </div>
+
+        <div id="resultadoInfantil" class="resultado"></div>
+    </div>
+
+    <div class="section-card">
+        <h3><i class="fas fa-book-open"></i> Ensino Fundamental</h3>
+
+        <div class="botoes">
+            <button onclick="carregarGrupo(24,29,this, 'resultadoFundamental')">1º Ano </button>
+            <button onclick="carregarGrupo(30,35,this, 'resultadoFundamental')">2º Ano </button>
+            <button onclick="carregarGrupo(36,41,this,'resultadoFundamental')">3º Ano </button>
+            <button onclick="carregarGrupo(42,47,this, 'resultadoFundamental')">4º Ano </button>
+            <button onclick="carregarGrupo(48,53,this, 'resultadoFundamental')">5º Ano </button>
+            <button onclick="carregarGrupo(54,59,this, 'resultadoFundamental')">6º Ano </button>
+            <button onclick="carregarGrupo(60,65,this, 'resultadoFundamental')">7º Ano </button>
+            <button onclick="carregarGrupo(66,71,this, 'resultadoFundamental')">8º Ano </button>
+             <button onclick="carregarGrupo(72,77,this, 'resultadoFundamental')">9º Ano </button>
+        </div>
+
+        <div id="resultadoFundamental" class="resultado"></div>
+    </div>
+
+    <div class="section-card">
+        <h3><i class="fas fa-puzzle-piece"></i> AEE</h3>
+
+    <div class="botoes">
+        <button onclick="carregarGrupo(78,78,this, 'resultadoAEE')">AEE</button>
+       
+    </div>
+
+    <div id="resultadoAEE" class="resultado"></div>
+    </div>
+    
+
+
+    <div class="section-card">
+    <h3><i class="fas fa-user-graduate"></i> EJA</h3>
+    <div class="botoes">
+        <button onclick="carregarGrupo(79,79, this, 'resultadoEJA')">EJA I</button>
+        <button onclick="carregarGrupo(80,80, this, 'resultadoEJA')">EJA II</button>
+    </div>
+    <div id="resultadoEJA" class="resultado"></div>
+</div>
+
+
+</div>
+
+ 
+
+</body>
+</html>
