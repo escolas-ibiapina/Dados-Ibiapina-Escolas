@@ -230,7 +230,34 @@
                 padding: 10px 15px;
                 font-size: 14px;
             }
-        }
+            
+        } 
+        <!-- Caixa de dúvidas-->
+        
+        form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+form input, 
+form textarea {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Open Sans', sans-serif;
+}
+
+form button {
+    background-color: var(--blue-primary);
+    color: white;
+    border: none;
+}
+
+form button:hover {
+    background-color: var(--green-highlight);
+}
     </style>
 
 </head>
@@ -365,11 +392,34 @@
     Escola Maria Sofia Matos
 </a>
 
+<!-- ================== SEÇÃO DE DÚVIDAS ================== -->
 
+<div class="section-card" style="margin:40px auto;">
+
+    <h3>Envie sua Dúvida</h3>
+
+    <form action="https://formsubmit.co/SEUEMAIL@gmail.com" method="POST">
+        
+        <input type="text" name="name" placeholder="Seu nome" required>
+        
+        <input type="email" name="email" placeholder="Seu email" required>
+        
+        <textarea name="message" rows="4" placeholder="Digite sua dúvida aqui..." required></textarea>
+
+        <!-- Configurações invisíveis -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="obrigado.html">
+
+        <button type="submit">Enviar Dúvida</button>
+
+    </form>
+
+</div>
     </body>
     
 
     </html>
+
 
 
 
