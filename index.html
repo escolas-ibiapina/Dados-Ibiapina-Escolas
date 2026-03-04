@@ -394,44 +394,12 @@ form button:hover {
 
 <!-- ================== SEÇÃO DE DÚVIDAS ================== -->
 
-<div class="section-card" style="margin:40px auto;">
-    <h3>Envie sua Dúvida</h3>
 
-    <form id="formDuvida">
-        <input type="text" name="name" placeholder="Seu nome" required>
-        <input type="email" name="email" placeholder="Seu email" required>
-        <textarea name="message" placeholder="Digite sua dúvida..." required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-
-    <p id="resposta"></p>
-</div>
-    
-<script>
-document.getElementById("formDuvida").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const form = e.target;
-    const dados = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbxsWr5He7kcdy1bqpTnGmodqdD1tZjccR4X5G0e76p3-cm9dVN9XKzA7H3WORCAKkdTlA/exec", {
-        method: "POST",
-        body: dados
-    })
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById("resposta").innerHTML = "✅ Dúvida enviada com sucesso!";
-        form.reset();
-    })
-    .catch(error => {
-        document.getElementById("resposta").innerHTML = "❌ Erro ao enviar.";
-    });
-});
-</script>
     </body>
     
 
     </html>
+
 
 
 
