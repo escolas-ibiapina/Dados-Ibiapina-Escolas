@@ -1,5 +1,7 @@
 <img width="696" height="623" alt="image" src="https://github.com/user-attachments/assets/f5b4e50f-61dc-4e55-96f6-c665968f908a" />
 <img width="696" height="623" alt="image" src="https://github.com/user-attachments/assets/ea689f7a-5a34-4b32-b334-bfd26b5be677" />
+<p> 
+</p>
 ⚪ Painel de Dados Educacionais Municipais
 
 Sistema web desenvolvido para organizar, visualizar e facilitar o acesso a dados das escolas do município.
