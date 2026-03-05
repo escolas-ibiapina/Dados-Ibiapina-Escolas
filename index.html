@@ -394,11 +394,46 @@ form button:hover {
 
 <!-- ================== SEÇÃO DE DÚVIDAS ================== -->
 
+<div class="section-card">
+<h3>Envie sua dúvida</h3>
 
+<input type="text" id="nome" placeholder="Seu nome">
+
+<textarea id="mensagem" placeholder="Digite sua dúvida"></textarea>
+
+<button onclick="enviarTelegram()">Enviar</button>
+
+</div>
+
+    <script>
+
+function enviarTelegram(){
+
+let nome = document.getElementById("nome").value
+let mensagem = document.getElementById("mensagem").value
+
+let texto = `Nova dúvida no site:%0A%0A👤 Nome: ${nome}%0A💬 Mensagem: ${mensagem}`
+
+let token = "8754577090:AAE7D08UoYgRBj3Iq6i66zzioD_fPWLXXWc"
+let chat_id = "8754577090"
+
+let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${texto}`
+
+fetch(url)
+.then(response => alert("Mensagem enviada com sucesso!"))
+.catch(error => alert("Erro ao enviar"))
+
+}
+
+</script>
+    
+
+    
     </body>
     
 
     </html>
+
 
 
 
