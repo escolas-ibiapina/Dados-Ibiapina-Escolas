@@ -233,31 +233,55 @@
             
         } 
         <!-- Caixa de dúvidas-->
-        
-        form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
+        /* Caixa de dúvidas */
+
+.section-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
-form input, 
-form textarea {
-    padding: 10px;
+.section-card h3 {
+    color: #12af6e;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+
+.section-card input,
+.section-card textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
     border-radius: 10px;
     border: 1px solid #ccc;
     font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
 }
 
-form button {
-    background-color: var(--blue-primary);
+/* Botão */
+
+.section-card button {
+    background-color: #12af6e;
     color: white;
     border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-form button:hover {
-    background-color: var(--green-highlight);
+.section-card button:hover {
+    background-color: #4b9cdf;
+    transform: translateY(-2px);
 }
+      
     </style>
 
 </head>
@@ -395,9 +419,12 @@ form button:hover {
 <!-- ================== SEÇÃO DE DÚVIDAS ================== -->
 
 <div class="section-card">
+
 <h3>Envie sua dúvida</h3>
 
 <input type="text" id="nome" placeholder="Seu nome">
+
+<input type="email" id="email" placeholder="Seu email">
 
 <textarea id="mensagem" placeholder="Digite sua dúvida"></textarea>
 
@@ -410,18 +437,21 @@ form button:hover {
 function enviarTelegram(){
 
 let nome = document.getElementById("nome").value
+let email = document.getElementById("email").value
 let mensagem = document.getElementById("mensagem").value
 
-let texto = `Nova dúvida no site:%0A%0A👤 Nome: ${nome}%0A💬 Mensagem: ${mensagem}`
-
-let token = "8754577090:AAE7D08UoYgRBj3Iq6i66zzioD_fPWLXXWc"
-let chat_id = "7690339320"
-
-let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${texto}`
-
-fetch(url)
-.then(response => alert("Mensagem enviada com sucesso!"))
-.catch(error => alert("Erro ao enviar"))
+fetch("http://localhost:3000/enviar",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+nome,
+email,
+mensagem
+})
+})
+.then(res=>alert("Mensagem enviada!"))
 
 }
 
@@ -431,6 +461,7 @@ fetch(url)
     
 
     </html>
+
 
 
 
