@@ -3,56 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escolas do Município- Acesso às Turmas</title>
+    <title>Escolas do Município - Acesso às Turmas</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        .botao-escola {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 90%;
-    max-width: 400px;
-    margin: 10px auto;
-    padding: 15px 20px;
-
-    background-color: #3c7db3; /* azul suave */
-    color: white;
-    border-radius: 12px;
-    text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 600;
-
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-    transition: 0.3s;
-}
-
-.botao-escola:hover {
-    background-color: #6c9ccc;
-    transform: translateY(-2px);
-}
-
-.botao-escola-icone {
-    width: 24px;
-    opacity: 0.8;
-}
-
-/* Botão marcado / ativo (verde) */
-.botao-escola.ativo {
-    background-color: #8ecfa0; /* verde suave */
-}
-
-        /* Paleta e Tipografia */
+        /* Variáveis de Cores */
         :root {
-            --blue-primary: #12af6e; /* Cornflower Blue */
-            --green-highlight: #4b9cdf; /* Green Yellow */
-            --dark-text: #2F4F4F; /* Dark Slate Gray */
-            --light-bg: #E0FFFF; /* Light Cyan para gradiente */
-            --soft-white: #F8F8FF; /* Ghost White */
+            --blue-primary: #12af6e; /* Na verdade é o verde do seu projeto */
+            --blue-button: #3c7db3;
+            --green-highlight: #8ecfa0;
+            --dark-text: #2F4F4F;
+            --light-bg: #E0FFFF;
+            --soft-white: #F8F8FF;
         }
 
         body {
-            /* Aplica o gradiente de fundo */
             background: linear-gradient(to bottom, var(--light-bg), var(--soft-white));
             font-family: 'Open Sans', sans-serif;
             color: var(--dark-text);
@@ -61,33 +26,22 @@
             text-align: center;
         }
 
-        /* --- Cabeçalho e Títulos --- */
-         .header-container2 {
-             /* Fundo sólido para o cabeçalho */
+        /* --- Cabeçalhos --- */
+        .header-container2 {
             background-color: white;
             width: 100%;
             padding: 20px 0;
             display: flex;
-            justify-content: center; /* Centraliza logo e títulos */
-            align-items: center;
-            flex-direction: column;
-            /* Cantos arredondados na parte inferior */
+            justify-content: center;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 25px;
-         }
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
         .header-container {
-            /* Fundo sólido para o cabeçalho */
             background-color: var(--blue-primary);
             width: 100%;
             padding: 20px 0;
-            display: flex;
-            justify-content: center; /* Centraliza logo e títulos */
-            align-items: center;
-            flex-direction: column;
-            /* Cantos arredondados na parte inferior */
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -95,195 +49,114 @@
         }
 
         .logo {
-            /* Ajuste para o celular */
             max-width: 200px; 
             height: auto;
-            margin-bottom: 10px;
         }
 
         .main-title {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 800; /* Extra Bold */
+            font-weight: 800;
             font-size: 2em;
-            color: white; /* Cor branca no banner */
+            color: white;
             margin: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .subtitle {
             font-size: 1.2em;
             color: var(--soft-white);
-            margin-bottom: 15px;
+            margin: 5px 0;
         }
 
-        /* --- Contêiner e Botões de Turmas --- */
-
-        .buttons-container {
+        /* --- Botões de Escolas --- */
+        .botao-escola {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 25px; /* Aumenta o espaçamento entre os grupos de botões */
-            padding: 0 10px;
+            gap: 12px;
+            width: 90%;
+            max-width: 400px;
+            margin: 12px auto;
+            padding: 15px 20px;
+            background-color: var(--blue-button);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+            transition: 0.3s;
         }
 
-        .button-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
+        .botao-escola:hover {
+            background-color: #6c9ccc;
+            transform: translateY(-2px);
         }
 
+        .botao-escola-icone {
+            width: 24px;
+            opacity: 0.9;
+        }
+
+        /* --- Seção de Dúvidas (Card) --- */
         .section-card {
             background-color: white;
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra mais visível */
-            max-width: 95%;
-            width: 500px;
-        }
-        
-        .section-card h3 {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 600;
-            color: var(--blue-primary);
-            border-bottom: 2px solid var(--blue-primary);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            font-size: 1.1em;
+            padding: 25px;
+            max-width: 450px;
+            margin: 40px auto; /* Centraliza o card na tela */
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
-        button {
-            /* Estilo Pílula */
-            border-radius: 25px; 
-            padding: 12px 20px;
+        .section-card h3 {
+            color: var(--blue-primary);
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-card input,
+        .section-card textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* Garante que o padding não aumente a largura */
             font-size: 15px;
+        }
+
+        .section-card textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .btn-enviar {
+            background-color: var(--blue-primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            
-            /* Estilo Padrão (Não Selecionado) */
-            background-color: var(--soft-white);
-            border: 1px solid var(--blue-primary);
-            color: var(--dark-text);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
 
-        button:hover {
-            background-color: #E6E6FA; /* Um toque de cor no hover */
-            border-color: var(--blue-primary);
-            transform: translateY(-2px); /* Efeito de elevação */
-            box-shadow: 0 4px 8px rgba(114, 209, 216, 0.15);
+        .btn-enviar:hover {
+            background-color: #0d8a56;
+            transform: scale(1.05);
         }
-
-        .active-button {
-            /* Estilo do botão Ativo/Selecionado */
-            background-color: var(--green-highlight);
-            color: var(--dark-text);
-            border-color: var(--green-highlight);
-            box-shadow: 0 6px 12px rgba(56, 130, 216, 0.4); 
-            transform: translateY(-2px);
-        }
-        
-        /* --- Área de Resultado e Instrução --- */
 
         .instrucao {
-            margin-top: 30px;
-            color: #666;
-            font-size: 1em;
+            margin: 20px 0;
+            color: #555;
             font-style: italic;
         }
 
-        #resultado {
-            /* Estilo do Placeholder/Resultado */
-            margin-top: 20px;
-            padding: 30px;
-            width: 85%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-            text-align: left;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            min-height: 150px;
-        }
-        #resultado h3 {
-            color: var(--blue-primary);
-            margin-top: 0;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        /* Responsividade básica para telas muito pequenas */
+        /* Responsividade */
         @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.5em;
-            }
-            .subtitle {
-                font-size: 1em;
-            }
-            .section-card {
-                padding: 15px;
-            }
-            button {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-            
-        } 
-        <!-- Caixa de dúvidas-->
-        /* Caixa de dúvidas */
-
-.section-card {
-    background-color: white;
-    border-radius: 15px;
-    padding: 25px;
-    max-width: 500px;
-    margin: 40px auto;
-    text-align: center;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-}
-
-.section-card h3 {
-    color: #12af6e;
-    margin-bottom: 20px;
-}
-
-/* Inputs */
-
-.section-card input,
-.section-card textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-}
-
-/* Botão */
-
-.section-card button {
-    background-color: #12af6e;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.section-card button:hover {
-    background-color: #4b9cdf;
-    transform: translateY(-2px);
-}
-      
+            .main-title { font-size: 1.5em; }
+            .botao-escola { font-size: 0.95em; }
+        }
     </style>
-
 </head>
 
 <body>
@@ -440,7 +313,7 @@ let nome = document.getElementById("nome").value
 let email = document.getElementById("email").value
 let mensagem = document.getElementById("mensagem").value
 
-fetch("http://localhost:3000/enviar",{
+fetch("https://api-duvidas-escolas.onrender.com",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -455,35 +328,12 @@ mensagem
 
 }
 
+
 </script>
     
     </body>
     
 
     </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
