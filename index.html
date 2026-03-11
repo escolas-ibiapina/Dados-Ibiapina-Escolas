@@ -140,9 +140,21 @@
             transition: 0.3s;
         }
 
-        .btn-enviar:hover {
+.btn-enviar:hover {
             background-color: #0d8a56;
             transform: scale(1.05);
+        }
+
+        /* Mensagem de sucesso */
+        .mensagem-sucesso {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 1px solid #c3e6cb;
+            font-weight: 600;
         }
 
         .instrucao {
@@ -301,17 +313,25 @@
 
 <textarea id="mensagem" placeholder="Digite sua dúvida"></textarea>
 
-<button onclick="enviarTelegram()">Enviar</button>
+<button onclick="enviarTelegram()" class="btn-enviar">Enviar</button>
+
+<div id="mensagemSucesso" class="mensagem-sucesso">Mensagem enviada com sucesso!</div>
 
 </div>
 
-    <script>
+<script>
 
 function enviarTelegram(){
 
 let nome = document.getElementById("nome").value
 let email = document.getElementById("email").value
 let mensagem = document.getElementById("mensagem").value
+
+// Validação simples
+if(nome === "" || email === "" || mensagem === ""){
+    alert("Por favor, preencha todos os campos!");
+    return;
+}
 
 fetch("https://api-duvidas-escolas.onrender.com/enviar",{
 method:"POST",
@@ -324,7 +344,23 @@ email,
 mensagem
 })
 })
-.then(res=>alert("Mensagem enviada!"))
+.then(res => {
+    // Limpar os campos
+    document.getElementById("nome").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("mensagem").value = "";
+    
+    // Mostrar mensagem de sucesso
+    document.getElementById("mensagemSucesso").style.display = "block";
+    
+    // Ocultar mensagem após 5 segundos
+    setTimeout(() => {
+        document.getElementById("mensagemSucesso").style.display = "none";
+    }, 5000);
+})
+.catch(err => {
+    alert("Erro ao enviar mensagem. Tente novamente.");
+});
 
 }
 
@@ -334,6 +370,5 @@ mensagem
     
 
     </html>
-
 
 
